@@ -1,0 +1,6 @@
+{
+  "extends": ["eslint:recommended", "prettier", "sa/vue"],
+  "settings": {
+    "import/core-modules": ["uno.css", "~icons/*", "virtual:svg-icons-register"]
+  }
+}

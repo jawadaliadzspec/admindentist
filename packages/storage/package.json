@@ -1,0 +1,17 @@
+{
+  "name": "@awal/storage",
+  "version": "1.0.0",
+  "description": "localForage is a fast and simple storage library for JavaScript. localForage improves the offline experience of your web app by using asynchronous storage (IndexedDB or WebSQL) with a simple, localStorage-like API.",
+  "author": "Awal Solution Team",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": ["./src/*"]
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  }
+}
