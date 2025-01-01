@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 // import { useBoolean } from '@sa/hooks';
+import { usePost, usePut } from '@awal/axios';
 import { useForm, useFormRules } from '@/hooks/common/form';
 import { $t } from '@/locales';
-import { usePost, usePut } from '~/packages/axios';
 // import { enableStatusOptions } from '@/constants/business';
 // import MenuAuthModal from './menu-auth-modal.vue';
 // import ButtonAuthModal from './button-auth-modal.vue';
 
-defineOptions({ name: 'RoleOperateDrawer' });
+defineOptions({ name: 'MenuOperateDrawer' });
 
 interface Props {
   /** the type of operation */
   operateType: UI.TableOperateType;
   /** the edit row data */
-  rowData?: Api.SystemManage.Role | null;
+  rowData?: any | null;
 }
 
 const props = defineProps<Props>();
@@ -42,20 +42,21 @@ const title = computed(() => {
   return titles[props.operateType];
 });
 
-type Model = Pick<Api.SystemManage.Role, 'name'>;
+type Model = { id?: number; name: string; status?: string | undefined };
 
 const model = ref(createDefaultModel());
 
 function createDefaultModel(): Model {
   return {
-    name: ''
+    id: 0,
+    name: '',
     // roleCode: '',
     // roleDesc: '',
-    // status: undefined
+    status: undefined
   };
 }
 
-type RuleKey = Exclude<keyof Model, 'name'>;
+type RuleKey = Exclude<keyof Model, 'status' | 'id'>;
 
 const rules: Record<RuleKey, App.Global.FormRule> = {
   name: defaultRequiredRule
@@ -81,14 +82,14 @@ async function handleSubmit() {
   await validate();
   // request
   if (props.operateType === 'edit') {
-    await usePut(`/roles/${model.value.id}`, model.value);
+    await usePut(`/menus/${model.value.id}`, model.value);
     window.$notification?.success({
       title: $t('common.update'),
       message: $t('common.updateSuccess'),
       duration: 4500
     });
   } else {
-    await usePost(`/roles`, model.value);
+    await usePost(`/menus`, model.value);
     window.$notification?.success({
       title: $t('common.add'),
       message: $t('common.addSuccess'),
@@ -112,8 +113,8 @@ watch(visible, () => {
 <template>
   <ElDrawer v-model="visible" :title="title" :size="360">
     <ElForm ref="formRef" :model="model" :rules="rules" label-position="top">
-      <ElFormItem :label="$t('page.manage.role.name')" prop="name">
-        <ElInput v-model="model.name" :placeholder="$t('page.manage.role.form.name')" />
+      <ElFormItem :label="$t('page.manage.menu.name')" prop="name">
+        <ElInput v-model="model.name" :placeholder="$t('page.manage.menu.form.name')" />
       </ElFormItem>
       <!--      <ElFormItem :label="$t('page.manage.role.roleCode')" prop="roleCode">-->
       <!--        <ElInput v-model="model.roleCode" :placeholder="$t('page.manage.role.form.roleCode')" />-->
