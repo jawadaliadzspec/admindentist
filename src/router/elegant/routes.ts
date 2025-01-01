@@ -74,6 +74,25 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     children: [
       {
+        name: 'manage_menu',
+        path: '/manage/menu',
+        component: 'view.manage_menu',
+        meta: {
+          title: 'manage_menu',
+          i18nKey: 'route.manage_menu'
+        }
+      },
+      {
+        name: 'manage_role',
+        path: '/manage/role',
+        component: 'view.manage_role',
+        meta: {
+          title: 'manage_role',
+          i18nKey: 'route.manage_role',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
         name: 'manage_user',
         path: '/manage/user',
         component: 'view.manage_user',

@@ -43,7 +43,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     apiFn,
     apiParams,
     columns: config.columns,
-    transformer: res => {
+    transformer: (res) => {
       // const { records = [], current = 1, size = 10, total = 0 } = res.data || {};
       const { data: records = [] } = res.data || {};
       const { current_page: current = 1, per_page: size = 10, total = 0 } = res.data.meta || {};
@@ -65,9 +65,9 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
         total
       };
     },
-    getColumnChecks: cols => {
+    getColumnChecks: (cols) => {
       const checks: UI.TableColumnCheck[] = [];
-      cols.forEach(column => {
+      cols.forEach((column) => {
         if (column.type === 'selection') {
           checks.push({
             prop: SELECTION_KEY,
@@ -100,7 +100,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     getColumns: (cols, checks) => {
       const columnMap = new Map<string, TableColumn<GetTableData<A>>>();
 
-      cols.forEach(column => {
+      cols.forEach((column) => {
         if (column.type === 'selection') {
           columnMap.set(SELECTION_KEY, column);
         } else if (column.type === 'expand') {
@@ -113,10 +113,10 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
       });
 
       return checks
-        .filter(item => item.checked)
-        .map(check => columnMap.get(check.prop) as TableColumn<GetTableData<A>>);
+        .filter((item) => item.checked)
+        .map((check) => columnMap.get(check.prop) as TableColumn<GetTableData<A>>);
     },
-    onFetched: async transformed => {
+    onFetched: async (transformed) => {
       const { pageNum, pageSize, total } = transformed;
 
       updatePagination({
@@ -135,7 +135,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     'current-change': (page: number) => {
       pagination.currentPage = page;
 
-      updateSearchParams({ current: page, size: pagination.pageSize! });
+      updateSearchParams({ page, perPage: pagination.pageSize! });
 
       getData();
 
@@ -145,7 +145,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
       pagination.currentPage = 1;
       pagination.pageSize = pageSize;
 
-      updateSearchParams({ current: pagination.currentPage, size: pageSize });
+      updateSearchParams({ page: pagination.currentPage, perPage: pageSize });
 
       getData();
       return true;
@@ -177,8 +177,8 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     });
 
     updateSearchParams({
-      current: pageNum,
-      size: pagination.pageSize!
+      page: pageNum,
+      perPage: pagination.pageSize!
     });
 
     await getData();
@@ -215,7 +215,10 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
   };
 }
 
-export function useTableOperate<T extends TableData = TableData>(data: any, getData: () => Promise<void>) {
+export function useTableOperate<T extends TableData = TableData>(
+  data: any,
+  getData: () => Promise<void>
+) {
   const { bool: drawerVisible, setTrue: openDrawer, setFalse: closeDrawer } = useBoolean();
 
   const operateType = ref<UI.TableOperateType>('add');
@@ -237,7 +240,7 @@ export function useTableOperate<T extends TableData = TableData>(data: any, getD
   }
 
   /** the checked row keys of table */
-  const checkedRowKeys = ref<string[]>([]);
+  const checkedRowKeys = ref<any[]>([]);
 
   /** the hook after the batch delete operation is completed */
   async function onBatchDeleted() {

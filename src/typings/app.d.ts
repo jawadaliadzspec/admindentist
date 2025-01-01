@@ -290,6 +290,9 @@ declare namespace App {
         updateCancel: string;
       };
       common: {
+        assignPermission: string;
+        status: string;
+        createdBy: string;
         action: string;
         add: string;
         addSuccess: string;
@@ -344,7 +347,10 @@ declare namespace App {
         themeSchema: { title: string } & Record<UnionKey.ThemeScheme, string>;
         grayscale: string;
         colourWeakness: string;
-        layoutMode: { title: string; reverseHorizontalMix: string } & Record<UnionKey.ThemeLayoutMode, string>;
+        layoutMode: { title: string; reverseHorizontalMix: string } & Record<
+          UnionKey.ThemeLayoutMode,
+          string
+        >;
         recommendColor: string;
         recommendColorDesc: string;
         themeColor: {
@@ -483,6 +489,20 @@ declare namespace App {
             phone_number: string;
             form: { name: string; email: string; phone_number: string };
           };
+          role: {
+            name: string;
+            title: string;
+            addRole: string;
+            editRole: string;
+            form: { name: string; status: string };
+          };
+          menu: {
+            name: string;
+            title: string;
+            addMenu: string;
+            editMenu: string;
+            form: { name: string; status: string };
+          };
         };
       };
       form: {
@@ -512,7 +532,10 @@ declare namespace App {
       };
     };
 
-    type GetI18nKey<T extends Record<string, unknown>, K extends keyof T = keyof T> = K extends string
+    type GetI18nKey<
+      T extends Record<string, unknown>,
+      K extends keyof T = keyof T
+    > = K extends string
       ? T[K] extends Record<string, unknown>
         ? `${K}.${GetI18nKey<T[K]>}`
         : K

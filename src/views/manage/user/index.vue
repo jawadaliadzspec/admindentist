@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm } from 'element-plus';
 import { useDelete } from '@awal/axios';
-import { fetchGetUserList } from '@/api/user';
+import { fetchGetUserList } from '@/api/manage';
 import { $t } from '@/locales';
 // import { enableStatusRecord, userGenderRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';

@@ -2,11 +2,15 @@ const local: App.I18n.Schema = {
   system: {
     title: 'MandiFlex Admin',
     updateTitle: 'System Version Update Notification',
-    updateContent: 'A new version of the system has been detected. Do you want to refresh the page immediately?',
+    updateContent:
+      'A new version of the system has been detected. Do you want to refresh the page immediately?',
     updateConfirm: 'Refresh immediately',
     updateCancel: 'Later'
   },
   common: {
+    assignPermission: 'Permissions',
+    status: 'Status',
+    createdBy: 'Created By',
     action: 'Action',
     add: 'Add',
     addSuccess: 'Add Success',
@@ -148,7 +152,8 @@ const local: App.I18n.Schema = {
     },
     configOperation: {
       copyConfig: 'Copy Config',
-      copySuccessMsg: 'Copy Success, Please replace the variable "themeSettings" in "src/theme/settings.ts"',
+      copySuccessMsg:
+        'Copy Success, Please replace the variable "themeSettings" in "src/theme/settings.ts"',
       resetConfig: 'Reset Config',
       resetSuccessMsg: 'Reset Success'
     }
@@ -160,7 +165,9 @@ const local: App.I18n.Schema = {
     500: 'Server Error',
     home: 'Home',
     manage: 'System Manage',
-    manage_user: 'Manage User'
+    manage_user: 'Manage User',
+    manage_role: 'Manage Role',
+    manage_menu: 'Manage Menu'
   },
   page: {
     login: {
@@ -246,6 +253,20 @@ const local: App.I18n.Schema = {
         email: 'Email',
         phone_number: 'Phone',
         form: { name: 'Enter Name', email: 'Enter email', phone_number: 'Enter Phone' }
+      },
+      role: {
+        name: 'Role',
+        title: 'Roles List',
+        addRole: 'Add Role',
+        editRole: 'Edit Role',
+        form: { name: 'Enter Role Name', status: 'Status' }
+      },
+      menu: {
+        name: 'Name',
+        title: 'Menus List',
+        addMenu: 'Add Menu',
+        editMenu: 'Edit Menu',
+        form: { name: 'Enter Role Name', status: 'Status' }
       }
     }
   },

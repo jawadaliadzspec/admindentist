@@ -21,9 +21,9 @@ declare namespace UI {
 
   type TableColumn<T> = TableColumnWithKey<T>;
 
-  type TableApiFn<T = any, R = Api.Common.CommonSearchParams> = (
+  type TableApiFn<T = any, R = Api.Common.PaginationParams> = (
     params: R
-  ) => Promise<FlatResponseData<Api.Common.PaginatingQueryRecord<T>>>;
+  ) => Promise<FlatResponseData<Api.Common.PaginationRecord<T>>>;
 
   /**
    * the type of table operation
@@ -36,7 +36,11 @@ declare namespace UI {
   type GetTableData<A extends TableApiFn> = A extends TableApiFn<infer T> ? T : never;
 
   type NaiveTableConfig<A extends TableApiFn> = Pick<
-    import('@sa/hooks').TableConfig<A, GetTableData<A>, TableColumn<TableDataWithIndex<GetTableData<A>>>>,
+    import('@sa/hooks').TableConfig<
+      A,
+      GetTableData<A>,
+      TableColumn<TableDataWithIndex<GetTableData<A>>>
+    >,
     'apiFn' | 'apiParams' | 'columns' | 'immediate'
   > & {
     /**
