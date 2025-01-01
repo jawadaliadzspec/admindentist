@@ -8,6 +8,8 @@ const local: App.I18n.Schema = {
     updateCancel: 'Later'
   },
   common: {
+    enable: 'Enable',
+    disable: 'Disable',
     assignPermission: 'Permissions',
     status: 'Status',
     createdBy: 'Created By',
@@ -246,6 +248,12 @@ const local: App.I18n.Schema = {
       creativity: 'Creativity'
     },
     manage: {
+      common: {
+        status: {
+          enable: 'Enable',
+          disable: 'Disable'
+        }
+      },
       user: {
         addUser: 'Add User',
         editUser: 'Edit User',
@@ -259,6 +267,7 @@ const local: App.I18n.Schema = {
         title: 'Roles List',
         addRole: 'Add Role',
         editRole: 'Edit Role',
+        roleStatus: 'Status',
         form: { name: 'Enter Role Name', status: 'Status' }
       },
       menu: {

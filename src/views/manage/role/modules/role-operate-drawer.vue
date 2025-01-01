@@ -116,24 +116,20 @@ watch(visible, () => {
       <ElFormItem :label="$t('page.manage.role.name')" prop="name">
         <ElInput v-model="model.name" :placeholder="$t('page.manage.role.form.name')" />
       </ElFormItem>
-      <!--      <ElFormItem :label="$t('page.manage.role.roleCode')" prop="roleCode">-->
-      <!--        <ElInput v-model="model.roleCode" :placeholder="$t('page.manage.role.form.roleCode')" />-->
-      <!--      </ElFormItem>-->
-      <!--      <ElFormItem :label="$t('page.manage.role.roleStatus')" prop="status">-->
-      <!--        <ElRadioGroup v-model="model.status">-->
-      <!--          <ElRadio v-for="{ label, value } in enableStatusOptions" :key="value" :value="value" :label="$t(label)" />-->
-      <!--        </ElRadioGroup>-->
-      <!--      </ElFormItem>-->
-      <!--      <ElFormItem :label="$t('page.manage.role.roleDesc')" prop="roleDesc">-->
-      <!--        <ElInput v-model="model.roleDesc" :placeholder="$t('page.manage.role.form.roleDesc')" />-->
-      <!--      </ElFormItem>-->
+      <ElFormItem :label="$t('common.status')" prop="status">
+        <ElRadioGroup v-model="model.status">
+          <ElRadio
+            v-for="{ label, value } in [
+              { label: 'common.disable', value: 0 },
+              { label: 'common.enable', value: 1 }
+            ]"
+            :key="value"
+            :value="value"
+            :label="$t(label)"
+          />
+        </ElRadioGroup>
+      </ElFormItem>
     </ElForm>
-    <!--    <ElSpace v-if="isEdit">-->
-    <!--      <ElButton @click="openMenuAuthModal">{{ $t('page.manage.role.menuAuth') }}</ElButton>-->
-    <!--      <MenuAuthModal v-model:visible="menuAuthVisible" :role-id="roleId" />-->
-    <!--      <ElButton @click="openButtonAuthModal">{{ $t('page.manage.role.buttonAuth') }}</ElButton>-->
-    <!--      <ButtonAuthModal v-model:visible="buttonAuthVisible" :role-id="roleId" />-->
-    <!--    </ElSpace>-->
     <template #footer>
       <ElSpace :size="16">
         <ElButton @click="closeDrawer">{{ $t('common.cancel') }}</ElButton>

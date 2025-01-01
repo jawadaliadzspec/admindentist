@@ -290,6 +290,8 @@ declare namespace App {
         updateCancel: string;
       };
       common: {
+        enable: string;
+        disable: string;
         assignPermission: string;
         status: string;
         createdBy: string;
@@ -481,6 +483,12 @@ declare namespace App {
           creativity: string;
         };
         manage: {
+          common: {
+            status: {
+              enable: string;
+              disable: string;
+            };
+          };
           user: {
             addUser: string;
             editUser: string;
@@ -494,6 +502,7 @@ declare namespace App {
             title: string;
             addRole: string;
             editRole: string;
+            roleStatus: string;
             form: { name: string; status: string };
           };
           menu: {
