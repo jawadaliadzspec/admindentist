@@ -266,7 +266,7 @@ const local: App.I18n.Schema = {
         title: 'Menus List',
         addMenu: 'Add Menu',
         editMenu: 'Edit Menu',
-        form: { name: 'Enter Role Name', status: 'Status' }
+        form: { name: 'Enter Menu Name', status: 'Status' }
       }
     }
   },

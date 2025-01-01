@@ -44,6 +44,21 @@ declare namespace Api {
   }
 
   namespace SystemManage {
+    type PaginationParams = Pick<Common.Pagination, 'page' | 'perPage'>;
+    /** role */
+    type Role = Common.CommonRecord<{
+      /** role name */
+      name: string;
+      /** role code */
+      // roleCode: string;
+      /** role description */
+      // roleDesc: string;
+    }>;
+
+    /** role search params */
+    type RoleSearchParams = CommonType.RecordNullable<
+      Pick<Api.SystemManage.Role, 'name' | 'status'> & PaginationParams
+    >;
     type MenuPropsOfRoute = Pick<
       import('vue-router').RouteMeta,
       | 'i18nKey'
