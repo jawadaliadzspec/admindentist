@@ -1,10 +1,10 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm, ElTag } from 'element-plus';
+import { useDelete } from '@awal/axios';
 import { fetchGetMenuList } from '@/api/manage';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';
 // import { enableStatusRecord } from '@/constants/business';
-import { useDelete } from '~/packages/axios';
 import MenuOperateDrawer from './modules/menu-operate-drawer.vue';
 import MenuSearch from './modules/menu-search.vue';
 
