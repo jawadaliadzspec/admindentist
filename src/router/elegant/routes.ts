@@ -47,7 +47,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'home',
       i18nKey: 'route.home',
       icon: 'tabler:heart-rate-monitor',
-      order: 1
+      order: 1,
+      permissions: ['dashboard']
     }
   },
   {
@@ -70,6 +71,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'manage',
       i18nKey: 'route.manage',
       icon: 'carbon:cloud-service-management',
+      permissions: ['system manage menu'],
       order: 2
     },
     children: [

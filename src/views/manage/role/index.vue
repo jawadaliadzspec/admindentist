@@ -1,6 +1,8 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm, ElTag } from 'element-plus';
-import { useDelete } from '@awal/axios';
+import { useDelete, useGet, usePut } from '@awal/axios';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
 import { fetchGetRoleList } from '@/api/manage';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';
@@ -56,7 +58,7 @@ const {
           <ElButton type="primary" plain size="small" onClick={() => edit(row.id)}>
             {$t('common.edit')}
           </ElButton>
-          <ElButton type="primary" plain size="small" onClick={() => assignPermission()}>
+          <ElButton type="primary" plain size="small" onClick={() => getAssignPermission(row.id)}>
             {$t('common.assignPermission')}
           </ElButton>
           <ElPopconfirm title={$t('common.confirmDelete')} onConfirm={() => handleDelete(row.id)}>
@@ -73,6 +75,11 @@ const {
     }
   ]
 });
+const dialogFormVisible = ref(false);
+// const formLabelWidth = '140px';
+const selectedPermissions: Ref = ref([]);
+const allPermissions: Ref = ref([]);
+const roleId: Ref = ref(null);
 
 const {
   drawerVisible,
@@ -106,8 +113,28 @@ async function handleDelete(id: number) {
 function edit(id: number) {
   handleEdit(id);
 }
-function assignPermission() {
-  console.log('dddd');
+async function getAssignPermission(id: number) {
+  roleId.value = id;
+  allPermissions.value = await useGet(`/menus`, {});
+  const role: any = await useGet(`/roles/${id}`, {});
+  selectedPermissions.value = role.data.permissions.map((item: any) => {
+    return item.id;
+  });
+  dialogFormVisible.value = true;
+}
+async function updateAssignPermission() {
+  const response: any = await usePut(`/roles/assign-permission/${roleId.value}`, {
+    permissions: selectedPermissions.value
+  });
+  if (response.code === 200) {
+    window.$notification?.success({
+      title: $t('common.update'),
+      message: $t('common.updateSuccess'),
+      duration: 4500
+    });
+    dialogFormVisible.value = false;
+    await getData();
+  }
 }
 </script>
 
@@ -161,6 +188,25 @@ function assignPermission() {
         @submitted="getDataByPage"
       />
     </ElCard>
+    <ElDialog v-model="dialogFormVisible" title="Role permissions" width="70%">
+      <ElTabs type="border-card" class="demo-tabs">
+        <ElTabPane v-for="item in allPermissions.data" :key="item.id" :label="item.name">
+          <ElCheckboxGroup v-model="selectedPermissions">
+            <ElRow :gutter="20">
+              <ElCol v-for="permission in item.permissions" :key="permission.id" :span="6">
+                <ElCheckbox :label="permission.name" :value="permission.id" />
+              </ElCol>
+            </ElRow>
+          </ElCheckboxGroup>
+        </ElTabPane>
+      </ElTabs>
+      <template #footer>
+        <div class="dialog-footer">
+          <ElButton @click="dialogFormVisible = false">Cancel</ElButton>
+          <ElButton type="primary" @click="updateAssignPermission">Confirm</ElButton>
+        </div>
+      </template>
+    </ElDialog>
   </div>
 </template>
 

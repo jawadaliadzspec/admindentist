@@ -8,6 +8,8 @@ const local: App.I18n.Schema = {
     updateCancel: 'Later'
   },
   common: {
+    assignRole: 'Assign Role',
+    role: 'Role',
     enable: 'Enable',
     disable: 'Disable',
     assignPermission: 'Permissions',

@@ -37,7 +37,7 @@ async function handleSubmit() {
   await authStore.login(model.value.email, model.value.password);
 }
 
-type AccountKey = 'super' | 'admin' | 'user';
+type AccountKey = 'super' | 'manager' | 'user';
 
 interface Account {
   key: AccountKey;
@@ -54,10 +54,10 @@ const accounts = computed<Account[]>(() => [
     password: 'admin@123'
   },
   {
-    key: 'admin',
+    key: 'manager',
     label: $t('page.login.pwdLogin.admin'),
-    email: 'Admin',
-    password: '123456'
+    email: 'test@gmail.com',
+    password: 'admin@123'
   },
   {
     key: 'user',
