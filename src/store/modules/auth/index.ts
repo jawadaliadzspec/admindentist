@@ -35,8 +35,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   /** is super role in static route */
   const isStaticSuper = computed(() => {
     const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env;
-
-    return VITE_AUTH_ROUTE_MODE === 'static' && userInfo.roles.includes(VITE_STATIC_SUPER_ROLE);
+    const hasSuperRole = userInfo.roles.some((role: any) => role?.name === VITE_STATIC_SUPER_ROLE);
+    return VITE_AUTH_ROUTE_MODE === 'static' && hasSuperRole;
   });
 
   /** Is login */
@@ -105,7 +105,9 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   async function allPermissions(user: Api.Auth.UserInfo) {
     // Extract permissions from roles
     const rolePermissions =
-      user?.roles?.flatMap((role: any) => role.permissions.map((permission: any) => permission.name)) || [];
+      user?.roles?.flatMap((role: any) =>
+        role.permissions.map((permission: any) => permission.name)
+      ) || [];
 
     // Extract direct user-specific permissions
     const userPermissions = user?.permissions.map((permission: any) => permission.name) || [];

@@ -1,6 +1,8 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm } from 'element-plus';
-import { useDelete } from '@awal/axios';
+import { useDelete, useGet, usePut } from '@awal/axios';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
 import { fetchGetUserList } from '@/api/manage';
 import { $t } from '@/locales';
 // import { enableStatusRecord, userGenderRecord } from '@/constants/business';
@@ -32,11 +34,25 @@ const {
     phone_number: undefined
   },
   columns: () => [
-    { type: 'selection', width: 48 },
-    { prop: 'index', label: $t('common.index'), width: 64 },
-    { prop: 'name', label: $t('page.manage.user.name'), minWidth: 100 },
-    { prop: 'email', label: $t('page.manage.user.email'), minWidth: 100 },
-    { prop: 'phone_number', label: $t('page.manage.user.phone_number'), minWidth: 100 },
+    { type: 'selection' },
+    { prop: 'index', label: $t('common.index'), width: 50 },
+    { prop: 'name', label: $t('page.manage.user.name') },
+    { prop: 'email', label: $t('page.manage.user.email') },
+    { prop: 'phone_number', label: $t('page.manage.user.phone_number') },
+    {
+      prop: 'roles',
+      label: $t('common.role'),
+      align: 'center',
+      formatter: (row: any) => {
+        return (
+          <div class="flex-center gap-2">
+            {row.roles.map((role: any) => (
+              <el-tag type="primary">{role.name}</el-tag>
+            ))}
+          </div>
+        );
+      }
+    },
     {
       prop: 'operate',
       label: $t('common.operate'),
@@ -46,6 +62,9 @@ const {
           <div class="flex-center">
             <ElButton type="primary" plain size="small" onClick={() => edit(row.id)}>
               {$t('common.edit')}
+            </ElButton>
+            <ElButton type="primary" plain size="small" onClick={() => editRole(row)}>
+              {$t('common.assignRole')}
             </ElButton>
             <ElPopconfirm title={$t('common.confirmDelete')} onConfirm={() => handleDelete(row.id)}>
               {{
@@ -74,6 +93,10 @@ const {
   onDeleted
   // closeDrawer
 } = useTableOperate(data, getData);
+const selectedRole: Ref = ref([]);
+const allRoles: Ref = ref([]);
+const dialogFormVisible = ref(false);
+const userId = ref(null);
 
 async function handleBatchDelete() {
   // request
@@ -93,6 +116,28 @@ async function handleDelete(id: number) {
 
 function edit(id: number) {
   handleEdit(id);
+}
+async function editRole(row: any) {
+  userId.value = row.id;
+  allRoles.value = await useGet(`/roles`, {});
+  selectedRole.value = row.roles.map((item: any) => {
+    return item.id;
+  });
+  dialogFormVisible.value = true;
+}
+async function updateRole() {
+  const response: any = await usePut(`/users/assign-role/${userId.value}`, {
+    roles: selectedRole.value
+  });
+  if (response.code === 200) {
+    window.$notification?.success({
+      title: $t('common.update'),
+      message: $t('common.updateSuccess'),
+      duration: 4500
+    });
+    dialogFormVisible.value = false;
+    await getData();
+  }
 }
 </script>
 
@@ -142,6 +187,24 @@ function edit(id: number) {
         @submitted="getDataByPage"
       />
     </ElCard>
+    <ElDialog v-model="dialogFormVisible" title="Shipping address" width="500">
+      <ElFormItem label="Roles">
+        <ElSelect v-model="selectedRole" multiple placeholder="Please select a role">
+          <ElOption
+            v-for="role in allRoles.data"
+            :key="role.id"
+            :label="role.name"
+            :value="role.id"
+          />
+        </ElSelect>
+      </ElFormItem>
+      <template #footer>
+        <div class="dialog-footer">
+          <ElButton @click="dialogFormVisible = false">Cancel</ElButton>
+          <ElButton type="primary" @click="updateRole">Confirm</ElButton>
+        </div>
+      </template>
+    </ElDialog>
   </div>
 </template>
 

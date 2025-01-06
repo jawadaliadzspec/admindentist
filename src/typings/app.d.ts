@@ -290,6 +290,8 @@ declare namespace App {
         updateCancel: string;
       };
       common: {
+        assignRole: string;
+        role: string;
         enable: string;
         disable: string;
         assignPermission: string;
