@@ -169,7 +169,8 @@ const local: App.I18n.Schema = {
     manage: 'System Manage',
     manage_user: 'Manage User',
     manage_role: 'Manage Role',
-    manage_menu: 'Manage Menu'
+    manage_menu: 'Manage Menu',
+    manage_permissions: 'Manage Permissions'
   },
   page: {
     login: {

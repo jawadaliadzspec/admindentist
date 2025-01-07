@@ -82,7 +82,18 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'manage_menu',
           i18nKey: 'route.manage_menu',
-          permissions: ['menu menu']
+          permissions: ['menu menu'],
+          icon: 'ep:menu'
+        }
+      },
+      {
+        name: 'manage_permissions',
+        path: '/manage/permissions',
+        component: 'view.manage_permissions',
+        meta: {
+          title: 'manage_permissions',
+          i18nKey: 'route.manage_permissions',
+          icon: 'tabler:lock-cog'
         }
       },
       {

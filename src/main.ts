@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import './plugins/assets';
+import { permission } from '@/directives/permission';
 import {
   setupAppVersionNotification,
   setupDayjs,
@@ -27,6 +28,7 @@ async function setupApp() {
   setupUI(app);
 
   setupStore(app);
+  app.directive('permission', permission);
 
   await setupRouter(app);
 
