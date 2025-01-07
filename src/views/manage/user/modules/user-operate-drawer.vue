@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import { usePut } from '@awal/axios';
 import { useForm, useFormRules } from '@/hooks/common/form';
@@ -10,7 +10,7 @@ interface Props {
   /** the type of operation */
   operateType: UI.TableOperateType;
   /** the edit row data */
-  rowData?: Api.SystemManage.User | null;
+  rowData?: any | null;
 }
 
 const props = defineProps<Props>();
@@ -36,7 +36,7 @@ const title = computed(() => {
   return titles[props.operateType];
 });
 
-type Model = Pick<Api.SystemManage.User, 'name' | 'email' | 'phone_number' | 'userRoles' | 'status'>;
+type Model = Pick<'name' | 'email' | 'phone_number' | 'userRoles' | 'status', any>;
 
 const model = ref(createDefaultModel());
 
@@ -44,9 +44,9 @@ function createDefaultModel(): Model {
   return {
     name: '',
     email: '',
-    phone_number: '',
-    userRoles: [],
-    status: undefined
+    phone_number: ''
+    // userRoles: [],
+    // status: undefined
   };
 }
 
@@ -116,7 +116,7 @@ watch(visible, () => {
 </script>
 
 <template>
-  <ElDrawer v-model="visible" :title="title" :size="360">
+  <ElDrawer v-model="visible" :size="360" :title="title">
     <ElForm ref="formRef" :model="model" :rules="rules" label-position="top">
       <ElFormItem :label="$t('page.manage.user.name')" prop="name">
         <ElInput v-model="model.name" :placeholder="$t('page.manage.user.form.name')" />

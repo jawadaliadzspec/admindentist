@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script lang="tsx" setup>
 import { ElButton, ElPopconfirm } from 'element-plus';
 import { useDelete, useGet, usePut } from '@awal/axios';
 import type { Ref } from 'vue';
@@ -7,8 +7,6 @@ import { fetchGetUserList } from '@/api/manage';
 import { $t } from '@/locales';
 // import { enableStatusRecord, userGenderRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';
-import UserOperateDrawer from './modules/user-operate-drawer.vue';
-import UserSearch from './modules/user-search.vue';
 
 defineOptions({ name: 'UserManage' });
 
@@ -17,11 +15,11 @@ const {
   columnChecks,
   data,
   getData,
-  getDataByPage,
+  // getDataByPage,
   loading,
-  mobilePagination,
-  searchParams,
-  resetSearchParams
+  mobilePagination
+  // searchParams,
+  // resetSearchParams
 } = useTable({
   apiFn: fetchGetUserList,
   showTotal: true,
@@ -83,9 +81,9 @@ const {
 });
 
 const {
-  drawerVisible,
-  operateType,
-  editingData,
+  // drawerVisible,
+  // operateType,
+  // editingData,
   handleAdd,
   handleEdit,
   checkedRowKeys,
@@ -117,6 +115,7 @@ async function handleDelete(id: number) {
 function edit(id: number) {
   handleEdit(id);
 }
+
 async function editRole(row: any) {
   userId.value = row.id;
   allRoles.value = await useGet(`/roles`, {});
@@ -125,6 +124,7 @@ async function editRole(row: any) {
   });
   dialogFormVisible.value = true;
 }
+
 async function updateRole() {
   const response: any = await usePut(`/users/assign-role/${userId.value}`, {
     roles: selectedRole.value
@@ -143,8 +143,8 @@ async function updateRole() {
 
 <template>
   <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
-    <UserSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" />
-    <ElCard class="sm:flex-1-hidden card-wrapper" body-class="ht50">
+    <!--    <UserSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" />-->
+    <ElCard body-class="ht50" class="sm:flex-1-hidden card-wrapper">
       <template #header>
         <div class="flex items-center justify-between">
           <p>{{ $t('page.manage.user.name') }}</p>
@@ -161,10 +161,10 @@ async function updateRole() {
       <div class="h-[calc(100%-50px)]">
         <ElTable
           v-loading="loading"
-          height="100%"
+          :data="data"
           border
           class="sm:h-full"
-          :data="data"
+          height="100%"
           row-key="id"
           @selection-change="checkedRowKeys = $event"
         >
@@ -180,22 +180,17 @@ async function updateRole() {
           @size-change="mobilePagination['size-change']"
         />
       </div>
-      <UserOperateDrawer
-        v-model:visible="drawerVisible"
-        :operate-type="operateType"
-        :row-data="editingData"
-        @submitted="getDataByPage"
-      />
+      <!--      <UserOperateDrawer-->
+      <!--        v-model:visible="drawerVisible"-->
+      <!--        :operate-type="operateType"-->
+      <!--        :row-data="editingData"-->
+      <!--        @submitted="getDataByPage"-->
+      <!--      />-->
     </ElCard>
     <ElDialog v-model="dialogFormVisible" title="Shipping address" width="500">
       <ElFormItem label="Roles">
         <ElSelect v-model="selectedRole" multiple placeholder="Please select a role">
-          <ElOption
-            v-for="role in allRoles.data"
-            :key="role.id"
-            :label="role.name"
-            :value="role.id"
-          />
+          <ElOption v-for="role in allRoles.data" :key="role.id" :label="role.name" :value="role.id" />
         </ElSelect>
       </ElFormItem>
       <template #footer>

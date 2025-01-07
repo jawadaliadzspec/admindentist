@@ -9,3 +9,6 @@ export const fetchGetRoleList = async (params: any) => {
 export const fetchGetMenuList = async (params: any) => {
   return await useGet('/menus', { params: { page: params.current, perPage: params.size } });
 };
+export const fetchGetPermissionsList = async (params: any) => {
+  return await useGet('/permissions', { params: { page: params.current, perPage: params.size } });
+};

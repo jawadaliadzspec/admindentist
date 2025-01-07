@@ -3,10 +3,9 @@ import { ref } from 'vue';
 import { $t } from '@/locales';
 // import { enableStatusOptions } from '@/constants/business';
 // import { translateOptions } from '@/utils/common';
+defineOptions({ name: 'PermissionSearch' });
 
-defineOptions({ name: 'MenuSearch' });
-
-const activeName = ref(['menu-search']);
+const activeName = ref(['permission-search']);
 
 interface Emits {
   (e: 'reset'): void;
@@ -30,11 +29,11 @@ function search() {
 <template>
   <ElCard class="card-wrapper">
     <ElCollapse v-model="activeName">
-      <ElCollapseItem :title="$t('common.search')" name="role-search">
+      <ElCollapseItem :title="$t('common.search')" name="permission-search">
         <ElForm :label-width="80" :model="model" label-position="right">
           <ElRow :gutter="24">
             <ElCol :lg="6" :md="8" :sm="12">
-              <ElFormItem :label="$t('page.manage.role.name')" prop="roleName">
+              <ElFormItem :label="$t('page.manage.role.name')" prop="name">
                 <ElInput v-model="model.name" :placeholder="$t('page.manage.role.name')" />
               </ElFormItem>
             </ElCol>

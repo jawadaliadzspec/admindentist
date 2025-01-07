@@ -48,7 +48,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.home',
       icon: 'tabler:heart-rate-monitor',
       order: 1,
-      permissions: ['dashboard']
+      permissions: ['dashboard menu']
     }
   },
   {
@@ -81,7 +81,19 @@ export const generatedRoutes: GeneratedRoute[] = [
         component: 'view.manage_menu',
         meta: {
           title: 'manage_menu',
-          i18nKey: 'route.manage_menu'
+          i18nKey: 'route.manage_menu',
+          permissions: ['menu menu'],
+          icon: 'ep:menu'
+        }
+      },
+      {
+        name: 'manage_permissions',
+        path: '/manage/permissions',
+        component: 'view.manage_permissions',
+        meta: {
+          title: 'manage_permissions',
+          i18nKey: 'route.manage_permissions',
+          icon: 'tabler:lock-cog'
         }
       },
       {
@@ -91,7 +103,8 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'manage_role',
           i18nKey: 'route.manage_role',
-          icon: 'carbon:user-role'
+          icon: 'carbon:user-role',
+          permissions: ['role menu']
         }
       },
       {
@@ -101,7 +114,8 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'manage_user',
           i18nKey: 'route.manage_user',
-          icon: 'ic:round-manage-accounts'
+          icon: 'ic:round-manage-accounts',
+          permissions: ['user menu']
         }
       }
     ]
