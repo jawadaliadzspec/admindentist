@@ -7,6 +7,13 @@ const local: App.I18n.Schema = {
     updateCancel: '稍后再说'
   },
   common: {
+    assignRole: 'Assign Role',
+    role: 'Role',
+    enable: 'Enable',
+    disable: 'Disable',
+    assignPermission: 'Permissions',
+    status: 'Status',
+    createdBy: 'Created By',
     action: '操作',
     add: '新增',
     addSuccess: '添加成功',
@@ -158,9 +165,11 @@ const local: App.I18n.Schema = {
     403: '无权限',
     404: '页面不存在',
     500: '服务器错误',
-    home: '首页',
-    manage: 'Manage',
-    manage_user: 'Manage User'
+    home: 'Dashboard',
+    manage: 'System Manage',
+    manage_user: 'Manage User',
+    manage_role: 'Manage Role',
+    manage_menu: 'Manage Menu'
   },
   page: {
     login: {
@@ -239,13 +248,34 @@ const local: App.I18n.Schema = {
       creativity: '创意'
     },
     manage: {
+      common: {
+        status: {
+          enable: 'Enable',
+          disable: 'Disable'
+        }
+      },
       user: {
         addUser: 'Add User',
         editUser: 'Edit User',
-        name: 'Name',
+        name: 'Users List',
         email: 'Email',
         phone_number: 'Phone',
         form: { name: 'Enter Name', email: 'Enter email', phone_number: 'Enter Phone' }
+      },
+      role: {
+        name: 'Role',
+        title: 'Roles List',
+        addRole: 'Add Role',
+        editRole: 'Edit Role',
+        roleStatus: 'Status',
+        form: { name: 'Enter Role Name', status: 'Status' }
+      },
+      menu: {
+        name: 'Name',
+        title: 'Menus List',
+        addMenu: 'Add Menu',
+        editMenu: 'Edit Menu',
+        form: { name: 'Enter Menu Name', status: 'Status' }
       }
     }
   },

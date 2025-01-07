@@ -1,7 +1,6 @@
-<script setup lang="ts">
-import { computed } from 'vue';
+<script lang="ts" setup>
 import { $t } from '@/locales';
-import { useForm, useFormRules } from '@/hooks/common/form';
+import { useForm } from '@/hooks/common/form';
 // import { enableStatusOptions } from '@/constants/business';
 // import { translateOptions } from '@/utils/common';
 
@@ -9,6 +8,7 @@ defineOptions({ name: 'UserSearch' });
 
 interface Emits {
   (e: 'reset'): void;
+
   (e: 'search'): void;
 }
 
@@ -16,18 +16,18 @@ const emit = defineEmits<Emits>();
 
 const { formRef, validate, restoreValidation } = useForm();
 
-const model = defineModel<Api.SystemManage.UserSearchParams>('model', { required: true });
+const model: any = defineModel('model', { required: true });
 
-type RuleKey = Extract<keyof Api.SystemManage.UserSearchParams, 'email' | 'phone_number'>;
+// type RuleKey = Extract<keyof 'email' | 'phone_number', any>;
 
-const rules = computed<Record<RuleKey, App.Global.FormRule>>(() => {
-  const { patternRules } = useFormRules(); // inside computed to make locale reactive
-
-  return {
-    email: patternRules.email,
-    phone_number: patternRules.phone
-  };
-});
+// const rules = computed<Record<RuleKey, App.Global.FormRule>>(() => {
+//   const { patternRules } = useFormRules(); // inside computed to make locale reactive
+//
+//   return {
+//     email: patternRules.email,
+//     phone_number: patternRules.phone
+//   };
+// });
 
 async function reset() {
   await restoreValidation();
@@ -44,7 +44,7 @@ async function search() {
   <ElCard class="card-wrapper">
     <ElCollapse>
       <ElCollapseItem :title="$t('common.search')" name="user-search">
-        <ElForm ref="formRef" :model="model" :rules="rules" label-position="right" :label-width="80">
+        <ElForm ref="formRef" :label-width="80" :model="model" label-position="right">
           <ElRow :gutter="24">
             <ElCol :lg="6" :md="8" :sm="12">
               <ElFormItem :label="$t('page.manage.user.name')" prop="name">
@@ -99,14 +99,14 @@ async function search() {
             </ElCol> 
 -->
             <ElCol :lg="12" :md="24" :sm="24">
-              <ElSpace class="w-full justify-end" alignment="end">
+              <ElSpace alignment="end" class="w-full justify-end">
                 <ElButton @click="reset">
                   <template #icon>
                     <icon-ic-round-refresh class="text-icon" />
                   </template>
                   {{ $t('common.reset') }}
                 </ElButton>
-                <ElButton type="primary" plain @click="search">
+                <ElButton plain type="primary" @click="search">
                   <template #icon>
                     <icon-ic-round-search class="text-icon" />
                   </template>
