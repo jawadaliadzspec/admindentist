@@ -12,9 +12,9 @@ export function usePermission() {
   }
 
   function hasPermission(accesses: string[]): boolean {
-    // if (isSuperAdmin()) {
-    //   return true;
-    // }
+    if (userStore.isStaticSuper) {
+      return true;
+    }
     return somePermissions(accesses);
   }
 
