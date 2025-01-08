@@ -1,8 +1,11 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm, ElTag } from 'element-plus';
-import { useDelete, useGet, usePut } from '@awal/axios';
+// import { useDelete, useGet, usePut } from '@awal/axios';
 import type { Ref } from 'vue';
 import { ref } from 'vue';
+import { usePut } from '~/packages/axios/src/use-put';
+import { useGet } from '~/packages/axios/src/use-get';
+import { useDelete } from '~/packages/axios/src/use-delete';
 import { fetchGetRoleList } from '@/api/manage';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';

@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { type Ref, computed, onMounted, ref, watch } from 'vue';
 // import { useBoolean } from '@sa/hooks';
-import { useGet, usePost, usePut } from '@awal/axios';
+// import { useGet, usePost, usePut } from '/packages/axios/src/index';
+// import { usePost, usePut } from '~/packages/axios';
+import { useGet } from '~/packages/axios/src/use-get';
+import { usePost } from '~/packages/axios/src/use-post';
+import { usePut } from '~/packages/axios/src/use-put';
 import { useForm, useFormRules } from '@/hooks/common/form';
 import { $t } from '@/locales';
 // import { enableStatusOptions } from '@/constants/business';

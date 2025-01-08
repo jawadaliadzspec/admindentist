@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import { usePut } from '@awal/axios';
+// import { usePut } from '@awal/axios';
+import { usePut } from '~/packages/axios/src/use-put';
 import { useForm, useFormRules } from '@/hooks/common/form';
 import { $t } from '@/locales';
 
@@ -95,6 +96,7 @@ function closeDrawer() {
 
 async function handleSubmit() {
   await validate();
+
   await usePut(`/users/${model.value.id}`, model.value);
   window.$notification?.success({
     title: $t('common.update'),
