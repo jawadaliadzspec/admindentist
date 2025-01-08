@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import { usePermission } from '@/hooks/permission/usePermission';
 import { $t } from '@/locales';
 
 defineOptions({ name: 'TableHeaderOperation' });
@@ -7,17 +8,21 @@ interface Props {
   // itemAlign?: UI.Align;
   disabledDelete?: boolean;
   loading?: boolean;
+  createPermission?: any;
 }
 
 defineProps<Props>();
 
 interface Emits {
   (e: 'add'): void;
+
   (e: 'delete'): void;
+
   (e: 'refresh'): void;
 }
 
 const emit = defineEmits<Emits>();
+const { hasPermission } = usePermission();
 
 const columns = defineModel<UI.TableColumnCheck[]>('columns', {
   default: () => []
@@ -37,10 +42,10 @@ function refresh() {
 </script>
 
 <template>
-  <ElSpace direction="horizontal" wrap justify="end" class="lt-sm:w-200px">
+  <ElSpace class="lt-sm:w-200px" direction="horizontal" justify="end" wrap>
     <slot name="prefix"></slot>
     <slot name="default">
-      <ElButton plain type="primary" @click="add">
+      <ElButton :disabled="!createPermission || !hasPermission([createPermission])" plain type="primary" @click="add">
         <template #icon>
           <icon-ic-round-plus class="text-icon" />
         </template>
@@ -48,7 +53,7 @@ function refresh() {
       </ElButton>
       <ElPopconfirm :title="$t('common.confirmDelete')" @confirm="batchDelete">
         <template #reference>
-          <ElButton type="danger" plain :disabled="disabledDelete">
+          <ElButton :disabled="disabledDelete" plain type="danger">
             <template #icon>
               <icon-ic-round-delete class="text-icon" />
             </template>
@@ -59,7 +64,7 @@ function refresh() {
     </slot>
     <ElButton @click="refresh">
       <template #icon>
-        <icon-mdi-refresh class="text-icon" :class="{ 'animate-spin': loading }" />
+        <icon-mdi-refresh :class="{ 'animate-spin': loading }" class="text-icon" />
       </template>
       {{ $t('common.refresh') }}
     </ElButton>

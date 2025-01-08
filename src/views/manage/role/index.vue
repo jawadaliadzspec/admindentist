@@ -141,11 +141,7 @@ async function updateAssignPermission() {
 <template>
   <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
     <RoleSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" />
-    <ElCard
-      :header="$t('page.manage.role.title')"
-      class="sm:flex-1-hidden card-wrapper"
-      body-class="ht50"
-    >
+    <ElCard :header="$t('page.manage.role.title')" class="sm:flex-1-hidden card-wrapper" body-class="ht50">
       <template #header>
         <div class="flex items-center justify-between">
           <p>{{ $t('page.manage.role.title') }}</p>

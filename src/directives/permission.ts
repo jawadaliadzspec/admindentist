@@ -6,6 +6,7 @@ export const permission: ObjectDirective = {
     const requiredPermissions = Array.isArray(binding.value) ? binding.value : [binding.value];
 
     if (!requiredPermissions.length) {
+      // eslint-disable-next-line no-console
       console.warn('Permission directive requires at least one value.');
       return;
     }

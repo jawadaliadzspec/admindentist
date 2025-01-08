@@ -105,9 +105,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   async function allPermissions(user: Api.Auth.UserInfo) {
     // Extract permissions from roles
     const rolePermissions =
-      user?.roles?.flatMap((role: any) =>
-        role.permissions.map((permission: any) => permission.name)
-      ) || [];
+      user?.roles?.flatMap((role: any) => role.permissions.map((permission: any) => permission.name)) || [];
 
     // Extract direct user-specific permissions
     const userPermissions = user?.permissions.map((permission: any) => permission.name) || [];
