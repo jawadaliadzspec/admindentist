@@ -95,7 +95,6 @@ function closeDrawer() {
 
 async function handleSubmit() {
   await validate();
-  console.log(model.value);
   await usePut(`/users/${model.value.id}`, model.value);
   window.$notification?.success({
     title: $t('common.update'),
