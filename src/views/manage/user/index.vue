@@ -1,8 +1,11 @@
 <script lang="tsx" setup>
 import { ElButton, ElPopconfirm } from 'element-plus';
-import { useDelete, useGet, usePut } from '@awal/axios';
+// import { useDelete, useGet, usePut } from '@awal/axios';
 import type { Ref } from 'vue';
 import { ref } from 'vue';
+import { useGet } from '~/packages/axios/src/use-get';
+import { useDelete } from '~/packages/axios/src/use-delete';
+import { usePut } from '~/packages/axios/src/use-put';
 import { fetchGetUserList } from '@/api/manage';
 import { $t } from '@/locales';
 // import { enableStatusRecord, userGenderRecord } from '@/constants/business';
