@@ -36,8 +36,8 @@ const { defaultRequiredRule } = useFormRules();
 
 const title = computed(() => {
   const titles: Record<UI.TableOperateType, string> = {
-    add: $t('page.manage.role.addRole'),
-    edit: $t('page.manage.role.editRole')
+    add: $t('page.manage.permission.addPermission'),
+    edit: $t('page.manage.permission.editPermission')
   };
   return titles[props.operateType];
 });
@@ -118,8 +118,8 @@ watch(visible, () => {
 <template>
   <ElDrawer v-model="visible" :size="360" :title="title">
     <ElForm ref="formRef" :model="model" :rules="rules" label-position="top">
-      <ElFormItem :label="$t('page.manage.menu.name')" prop="name">
-        <ElInput v-model="model.name" :placeholder="$t('page.manage.menu.form.name')" />
+      <ElFormItem :label="$t('page.manage.permission.name')" prop="name">
+        <ElInput v-model="model.name" :placeholder="$t('page.manage.permission.form.name')" />
       </ElFormItem>
       <ElFormItem :label="$t('common.status')" prop="menu_id">
         <ElSelect v-model="model.menu_id" placeholder="Select Menu">

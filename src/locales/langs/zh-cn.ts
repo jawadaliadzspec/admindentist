@@ -277,6 +277,13 @@ const local: App.I18n.Schema = {
         addMenu: 'Add Menu',
         editMenu: 'Edit Menu',
         form: { name: 'Enter Menu Name', status: 'Status' }
+      },
+      permission: {
+        name: 'Name',
+        title: 'Permissions List',
+        addPermission: 'Add Permission',
+        editPermission: 'Edit Permission',
+        form: { name: 'Enter Permission Name', status: 'Status' }
       }
     }
   },
