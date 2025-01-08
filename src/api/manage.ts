@@ -1,5 +1,4 @@
 // import { useGet } from '@awal/axios';
-
 import { useGet } from '~/packages/axios/src/use-get';
 export const fetchGetUserList = async (params: any) => {
   return await useGet('/users', { params: { page: params.current, perPage: params.size } });
