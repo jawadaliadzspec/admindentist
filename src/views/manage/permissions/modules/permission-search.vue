@@ -33,8 +33,8 @@ function search() {
         <ElForm :label-width="80" :model="model" label-position="right">
           <ElRow :gutter="24">
             <ElCol :lg="6" :md="8" :sm="12">
-              <ElFormItem :label="$t('page.manage.role.name')" prop="name">
-                <ElInput v-model="model.name" :placeholder="$t('page.manage.role.name')" />
+              <ElFormItem :label="$t('page.manage.permission.name')" prop="name">
+                <ElInput v-model="model.name" :placeholder="$t('page.manage.permission.name')" />
               </ElFormItem>
             </ElCol>
             <!--            <ElCol :lg="6" :md="8" :sm="12">-->

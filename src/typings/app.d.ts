@@ -510,6 +510,13 @@ declare namespace App {
             editMenu: string;
             form: { name: string; status: string };
           };
+          permission: {
+            name: string;
+            title: string;
+            addPermission: string;
+            editPermission: string;
+            form: { name: string; status: string };
+          };
         };
       };
       form: {
