@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { type Ref, computed, onMounted, ref, watch } from 'vue';
 // import { useBoolean } from '@sa/hooks';
-import { usePost, usePut } from '@awal/axios';
+import { useGet, usePost, usePut } from '@awal/axios';
 import { useForm, useFormRules } from '@/hooks/common/form';
 import { $t } from '@/locales';
 // import { enableStatusOptions } from '@/constants/business';
@@ -42,7 +42,7 @@ const title = computed(() => {
   return titles[props.operateType];
 });
 
-type Model = { id?: number; name: string; status?: string | undefined };
+type Model = { id?: number; name: string; menu_id: undefined; status?: string | undefined };
 
 const model = ref(createDefaultModel());
 
@@ -50,8 +50,7 @@ function createDefaultModel(): Model {
   return {
     id: 0,
     name: '',
-    // roleCode: '',
-    // roleDesc: '',
+    menu_id: undefined,
     status: undefined
   };
 }
@@ -59,7 +58,8 @@ function createDefaultModel(): Model {
 type RuleKey = Exclude<keyof Model, 'status' | 'id'>;
 
 const rules: Record<RuleKey, App.Global.FormRule> = {
-  name: defaultRequiredRule
+  name: defaultRequiredRule,
+  menu_id: defaultRequiredRule
 };
 
 // const roleId = computed(() => props.rowData?.id || -1);
@@ -102,6 +102,11 @@ async function handleSubmit() {
   emit('submitted');
 }
 
+const menus: Ref = ref({});
+onMounted(async () => {
+  const response = await useGet('/menus', {});
+  menus.value = response.data;
+});
 watch(visible, () => {
   if (visible.value) {
     handleInitModel();
@@ -115,6 +120,11 @@ watch(visible, () => {
     <ElForm ref="formRef" :model="model" :rules="rules" label-position="top">
       <ElFormItem :label="$t('page.manage.menu.name')" prop="name">
         <ElInput v-model="model.name" :placeholder="$t('page.manage.menu.form.name')" />
+      </ElFormItem>
+      <ElFormItem :label="$t('common.status')" prop="menu_id">
+        <ElSelect v-model="model.menu_id" placeholder="Select Menu">
+          <ElOption v-for="item in menus" :key="item.id" :label="item.name" :value="item.id" />
+        </ElSelect>
       </ElFormItem>
       <ElFormItem :label="$t('common.status')" prop="status">
         <ElRadioGroup v-model="model.status">

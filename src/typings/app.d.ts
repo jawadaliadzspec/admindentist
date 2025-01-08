@@ -258,7 +258,6 @@ declare namespace App {
     /** The global dropdown key */
     type DropdownKey = 'closeCurrent' | 'closeOther' | 'closeLeft' | 'closeRight' | 'closeAll';
   }
-
   /**
    * I18n namespace
    *
@@ -351,10 +350,7 @@ declare namespace App {
         themeSchema: { title: string } & Record<UnionKey.ThemeScheme, string>;
         grayscale: string;
         colourWeakness: string;
-        layoutMode: { title: string; reverseHorizontalMix: string } & Record<
-          UnionKey.ThemeLayoutMode,
-          string
-        >;
+        layoutMode: { title: string; reverseHorizontalMix: string } & Record<UnionKey.ThemeLayoutMode, string>;
         recommendColor: string;
         recommendColorDesc: string;
         themeColor: {
@@ -543,10 +539,7 @@ declare namespace App {
       };
     };
 
-    type GetI18nKey<
-      T extends Record<string, unknown>,
-      K extends keyof T = keyof T
-    > = K extends string
+    type GetI18nKey<T extends Record<string, unknown>, K extends keyof T = keyof T> = K extends string
       ? T[K] extends Record<string, unknown>
         ? `${K}.${GetI18nKey<T[K]>}`
         : K
@@ -558,13 +551,21 @@ declare namespace App {
 
     interface $T {
       (key: I18nKey): string;
+
       (key: I18nKey, plural: number, options?: TranslateOptions<LangType>): string;
+
       (key: I18nKey, defaultMsg: string, options?: TranslateOptions<I18nKey>): string;
+
       (key: I18nKey, list: unknown[], options?: TranslateOptions<I18nKey>): string;
+
       (key: I18nKey, list: unknown[], plural: number): string;
+
       (key: I18nKey, list: unknown[], defaultMsg: string): string;
+
       (key: I18nKey, named: Record<string, unknown>, options?: TranslateOptions<LangType>): string;
+
       (key: I18nKey, named: Record<string, unknown>, plural: number): string;
+
       (key: I18nKey, named: Record<string, unknown>, defaultMsg: string): string;
     }
   }
