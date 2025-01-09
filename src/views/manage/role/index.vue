@@ -62,7 +62,7 @@ const {
             {$t('common.edit')}
           </ElButton>
           <ElButton
-            v-permission="role assign permissions"
+            v-permission="role assign permission"
             type="primary"
             plain
             size="small"
