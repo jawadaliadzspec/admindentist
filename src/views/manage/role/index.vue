@@ -61,7 +61,13 @@ const {
           <ElButton v-permission="role update" type="primary" plain size="small" onClick={() => edit(row.id)}>
             {$t('common.edit')}
           </ElButton>
-          <ElButton type="primary" plain size="small" onClick={() => getAssignPermission(row.id)}>
+          <ElButton
+            v-permission="role assign permissions"
+            type="primary"
+            plain
+            size="small"
+            onClick={() => getAssignPermission(row.id)}
+          >
             {$t('common.assignPermission')}
           </ElButton>
           <ElPopconfirm title={$t('common.confirmDelete')} onConfirm={() => handleDelete(row.id)}>
