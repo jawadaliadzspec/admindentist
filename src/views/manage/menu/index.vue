@@ -53,13 +53,13 @@ const {
       width: 130,
       formatter: (row: any) => (
         <div class="flex-center">
-          <ElButton type="primary" plain size="small" onClick={() => edit(row.id)}>
+          <ElButton type="primary" v-permission="menu update" plain size="small" onClick={() => edit(row.id)}>
             {$t('common.edit')}
           </ElButton>
           <ElPopconfirm title={$t('common.confirmDelete')} onConfirm={() => handleDelete(row.id)}>
             {{
               reference: () => (
-                <ElButton type="danger" plain size="small">
+                <ElButton v-permission="menu delete" type="danger" plain size="small">
                   {$t('common.delete')}
                 </ElButton>
               )
@@ -84,7 +84,7 @@ const {
 } = useTableOperate(data, getData);
 
 async function handleBatchDelete() {
-  // request
+  // requests
   for (const item of checkedRowKeys.value) {
     // eslint-disable-next-line no-await-in-loop
     await useDelete(`/menus/${item.id}`, {});
@@ -116,6 +116,8 @@ function edit(id: number) {
             v-model:columns="columnChecks"
             :disabled-delete="checkedRowKeys.length === 0"
             :loading="loading"
+            create-permission="menu create"
+            delete-permission="menu delete"
             @add="handleAdd"
             @delete="handleBatchDelete"
             @refresh="getData"
