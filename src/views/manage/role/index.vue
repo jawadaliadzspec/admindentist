@@ -58,7 +58,7 @@ const {
       // width: 200,
       formatter: (row: any) => (
         <div class="flex-center">
-          <ElButton type="primary" plain size="small" onClick={() => edit(row.id)}>
+          <ElButton v-permission="role update" type="primary" plain size="small" onClick={() => edit(row.id)}>
             {$t('common.edit')}
           </ElButton>
           <ElButton type="primary" plain size="small" onClick={() => getAssignPermission(row.id)}>
@@ -67,7 +67,7 @@ const {
           <ElPopconfirm title={$t('common.confirmDelete')} onConfirm={() => handleDelete(row.id)}>
             {{
               reference: () => (
-                <ElButton type="danger" plain size="small">
+                <ElButton v-permission="role delete" type="danger" plain size="small">
                   {$t('common.delete')}
                 </ElButton>
               )
@@ -152,6 +152,8 @@ async function updateAssignPermission() {
             v-model:columns="columnChecks"
             :disabled-delete="checkedRowKeys.length === 0"
             :loading="loading"
+            create-permission="role create"
+            delete-permission="role delete"
             @add="handleAdd"
             @delete="handleBatchDelete"
             @refresh="getData"
