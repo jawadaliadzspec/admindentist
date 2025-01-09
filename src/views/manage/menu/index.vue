@@ -84,7 +84,7 @@ const {
 } = useTableOperate(data, getData);
 
 async function handleBatchDelete() {
-  // request
+  // requests
   for (const item of checkedRowKeys.value) {
     // eslint-disable-next-line no-await-in-loop
     await useDelete(`/menus/${item.id}`, {});
