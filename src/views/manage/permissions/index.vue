@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
 import { ElButton, ElPopconfirm, ElTag } from 'element-plus';
 import { useDelete } from '@awal/axios';
-import { fetchGetPermissionsList } from '@/api/manage';
+import { fetchPermissionsList } from '@/api/manage';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';
 import PermissionOperateDrawer from './modules/permission-operate-drawer.vue';
@@ -18,7 +18,7 @@ const {
   searchParams,
   resetSearchParams
 } = useTable({
-  apiFn: fetchGetPermissionsList,
+  apiFn: fetchPermissionsList,
   apiParams: {
     current: 1,
     size: 10,

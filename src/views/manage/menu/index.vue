@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm, ElTag } from 'element-plus';
 import { useDelete } from '@awal/axios';
-import { fetchGetMenuList } from '@/api/manage';
+import { fetchMenuList } from '@/api/manage';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';
 // import { enableStatusRecord } from '@/constants/business';
@@ -19,7 +19,7 @@ const {
   searchParams,
   resetSearchParams
 } = useTable({
-  apiFn: fetchGetMenuList,
+  apiFn: fetchMenuList,
   apiParams: {
     current: 1,
     size: 10,

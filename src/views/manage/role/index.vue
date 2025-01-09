@@ -6,7 +6,7 @@ import { ref } from 'vue';
 import { usePut } from '~/packages/axios/src/use-put';
 import { useGet } from '~/packages/axios/src/use-get';
 import { useDelete } from '~/packages/axios/src/use-delete';
-import { fetchGetRoleList } from '@/api/manage';
+import { fetchRoleList } from '@/api/manage';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';
 // import { enableStatusRecord } from '@/constants/business';
@@ -24,7 +24,7 @@ const {
   searchParams,
   resetSearchParams
 } = useTable({
-  apiFn: fetchGetRoleList,
+  apiFn: fetchRoleList,
   apiParams: {
     current: 1,
     size: 10,

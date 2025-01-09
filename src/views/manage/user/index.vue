@@ -6,7 +6,7 @@ import { ref } from 'vue';
 import { useGet } from '~/packages/axios/src/use-get';
 import { useDelete } from '~/packages/axios/src/use-delete';
 import { usePut } from '~/packages/axios/src/use-put';
-import { fetchGetUserList } from '@/api/manage';
+import { fetchUserList } from '@/api/manage';
 import { $t } from '@/locales';
 // import { enableStatusRecord, userGenderRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';
@@ -24,7 +24,7 @@ const {
   // searchParams,
   // resetSearchParams
 } = useTable({
-  apiFn: fetchGetUserList,
+  apiFn: fetchUserList,
   showTotal: true,
   apiParams: {
     current: 1,
