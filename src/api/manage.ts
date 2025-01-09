@@ -1,14 +1,12 @@
-// import { useGet } from '@awal/axios';
 import { useGet } from '~/packages/axios/src/use-get';
-export const fetchGetUserList = async (params: any) => {
-  return await useGet('/users', { params: { page: params.page ?? 1, perPage: params.perPage ?? 10 } });
+
+const fetchResourceList = async (resource: string, params: any = {}) => {
+  const defaultParams = { page: 1, perPage: 10 };
+  const queryParams = { ...defaultParams, ...params };
+  return await useGet(`/${resource}`, { params: queryParams });
 };
-export const fetchGetRoleList = async (params: any) => {
-  return await useGet('/roles', { params: { page: params.page ?? 1, perPage: params.perPage ?? 10 } });
-};
-export const fetchGetMenuList = async (params: any) => {
-  return await useGet('/menus', { params: { page: params.page ?? 1, perPage: params.perPage ?? 10 } });
-};
-export const fetchGetPermissionsList = async (params: any) => {
-  return await useGet('/permissions', { params: { page: params.page ?? 1, perPage: params.perPage ?? 10 } });
-};
+
+export const fetchGetUserList = async (params: any) => fetchResourceList('users', params);
+export const fetchGetRoleList = async (params: any) => fetchResourceList('roles', params);
+export const fetchGetMenuList = async (params: any) => fetchResourceList('menus', params);
+export const fetchGetPermissionsList = async (params: any) => fetchResourceList('permissions', params);
