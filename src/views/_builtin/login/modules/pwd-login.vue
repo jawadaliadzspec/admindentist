@@ -56,7 +56,7 @@ const accounts = computed<Account[]>(() => [
   {
     key: 'manager',
     label: $t('page.login.pwdLogin.admin'),
-    email: 'test@gmail.com',
+    email: 'manager@gmail.com',
     password: 'admin@123'
   },
   {

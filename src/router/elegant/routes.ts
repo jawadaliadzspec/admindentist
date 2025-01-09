@@ -93,7 +93,8 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'manage_permissions',
           i18nKey: 'route.manage_permissions',
-          icon: 'tabler:lock-cog'
+          icon: 'tabler:lock-cog',
+          permissions: ['permission menu'],
         }
       },
       {

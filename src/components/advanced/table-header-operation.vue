@@ -9,6 +9,7 @@ interface Props {
   disabledDelete?: boolean;
   loading?: boolean;
   createPermission?: any;
+  deletePermission?: any;
 }
 
 defineProps<Props>();
@@ -53,7 +54,11 @@ function refresh() {
       </ElButton>
       <ElPopconfirm :title="$t('common.confirmDelete')" @confirm="batchDelete">
         <template #reference>
-          <ElButton :disabled="disabledDelete" plain type="danger">
+          <ElButton
+            :disabled="disabledDelete || !deletePermission || !hasPermission([deletePermission])"
+            plain
+            type="danger"
+          >
             <template #icon>
               <icon-ic-round-delete class="text-icon" />
             </template>
