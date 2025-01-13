@@ -104,7 +104,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'manage_role',
           i18nKey: 'route.manage_role',
-          icon: 'carbon:user-role',
+          icon: 'oui:app-users-roles',
           permissions: ['role menu']
         }
       },
